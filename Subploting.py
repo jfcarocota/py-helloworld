@@ -37,7 +37,7 @@ maleMathScoreAverage = np.average(maleMathScore)
 plt.figure()
 
 #Grafica Promedio en Pruebas de Matemátcias por género
-plt.subplot(2, 2, 1)
+plt.subplot(3, 2, 1)
 plt.title('Promedio de pruebas de matemáticas por genero')
 
 plt.bar([1], [maleMathScoreAverage], color = 'blue')
@@ -77,7 +77,7 @@ gDScoreAverage = np.average(gDMathScore)
 gEScoreAverage = np.average(gEMathScore)
 
 #Gráfica Promedio en Pruebas de Matemátcias por etnia
-plt.subplot(2, 2, 2)
+plt.subplot(3, 2, 2)
 plt.title('Promedio de pruebas de matemáticas por etnia')
 
 plt.bar(1, gAScoreAverage, color = 'r')
@@ -117,7 +117,7 @@ ADScoreAverage = np.average(ADMathScore)
 HSScoreAverage = np.average(HSMathScore)
 
 #Gráfica Promedio en Pruebas de Matemátcias por Nivel educativo de los padres
-plt.subplot(2, 2, 3)
+plt.subplot(3, 2, 3)
 plt.title('Promedio de pruebas de matemáticas por Nivel educativo de los padres')
 
 plt.bar(1, SCScoreAverage, color = 'g')
@@ -131,5 +131,54 @@ plt.legend(["bachelor's degree", 'some college', "master's degree", "associate's
 plt.xlabel('Nivel Educativo')
 plt.ylabel('Puntaje')
 
+#analisis por alimentación
+
+standarFilter = dataNeeded['lunch'].isin(["standard"])
+reducedFilter = dataNeeded['lunch'].isin(["free/reduced"])
+
+standarData = dataNeeded[standarFilter]
+reducedData = dataNeeded[reducedFilter]
+
+standarMathScore = standarData['math score']
+reducedMathScore = reducedData['math score']
+
+standarScoreAverage = np.average(standarMathScore)
+reducedScoreAverage = np.average(reducedMathScore)
+
+plt.subplot(3, 2, 4)
+plt.title('Promedio de pruebas de matemáticas por grado de alimentación')
+
+plt.bar(1, standarScoreAverage, color = 'g')
+plt.bar(2, reducedScoreAverage, color = 'r')
+
+plt.legend(['standard', 'free/reduced'])
+
+plt.xlabel('tipo de alimentación')
+plt.ylabel('promedio en matematicas')
+
+#ianalisis por test preparación 
+
+noneFilter = dataNeeded['test preparation course'].isin(["none"])
+completedFilter = dataNeeded['test preparation course'].isin(["completed"])
+
+noneData = dataNeeded[noneFilter]
+completedData = dataNeeded[completedFilter]
+
+noneMathScore = noneData['math score']
+completedMathScore = completedData['math score']
+
+noneScoreAverage = np.average(noneMathScore)
+completedScoreAverage = np.average(completedMathScore)
+
+plt.subplot(3, 2, 5)
+plt.title('Promedio de pruebas de matemáticas por preparacion')
+
+plt.bar(1, noneScoreAverage, color = 'r')
+plt.bar(2, completedScoreAverage, color = 'g')
+
+plt.legend(['none', 'completed'])
+
+plt.xlabel('preparación')
+plt.ylabel('promedio en matematicas')
 
 plt.show()
